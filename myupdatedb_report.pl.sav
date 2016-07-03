@@ -1,10 +1,2 @@
 /dev/sda6	/	ext4	9	0
-udev	/dev	devtmpfs	9	0
-devpts	/dev/pts	devpts	9	0
 /dev/sdc1	/media/vincent/Elements	vfat	2	4
-proc	/proc	proc	9	0
-binfmt_misc	/proc/sys/fs/binfmt_misc	binfmt_misc	9	0
-tmpfs	/run	tmpfs	9	0
-gvfsd-fuse	/run/user/1000/gvfs	fuse.gvfsd-fuse	9	0
-sysfs	/sys	sysfs	9	0
-systemd	/sys/fs/cgroup/systemd	cgroup	9	0
