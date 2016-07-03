@@ -1,0 +1,31 @@
+# met à jour la base de données si pas fait depuis un jour
+# part of package myupdatedb>myrequire>mysay
+# x>y means program x can call program y
+
+database=/var/lib/mlocate/mlocate.db
+dbdate_seconds=`date -r "$database" '+%s'`
+now_seconds=`date '+%s'`
+
+echo now_seconds=$now_seconds
+echo dbdate_seconds=$dbdate_seconds
+
+# $[] : math mode
+diff_seconds=`echo "$now_seconds - $dbdate_seconds" | bc -l `
+#mysay "now_seconds=$now_seconds, dbdate_seconds=$dbdate_seconds, diff_seconds=$diff_seconds"
+
+if which myupdatedb_report.pl
+then
+	echo "*************************************";
+	echo "*    Liste des disques à indexer    *";
+	echo "*************************************";
+	myupdatedb_report.pl
+	echo "*************************************";
+fi
+# 1 jour = 3600s/h * 24h = 122400 s
+if [ "$diff_seconds" -lt 122400 ]
+then
+	mysay "Your updatedb database is pretty much up to date" &
+else
+	mysay "Myupdatedb needs to update your database" &
+	gksudo updatedb 
+fi

@@ -1,0 +1,25 @@
+# require v0.1
+#
+# requires a package installation by any means, if possible through gksudo.
+
+package=$1
+message=$2
+
+if [ -n `which gksudo` ]
+then
+	if test -n "$message"
+	then
+		gksudo --message "$message" "apt-get install $package"
+	else   
+	       	gksudo --message "Un programme veut installer le package : $package" "apt-get install $package"
+	fi
+else # defaults to sudo
+	if test -n "$message"
+	then
+		echo $message
+	else
+		echo Un programme souhaite installer "$package"
+	fi
+
+	sudo "apt-get install $package"
+fi
